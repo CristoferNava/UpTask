@@ -1,3 +1,5 @@
+const Projects = require('../models/Projects');
+
 exports.home = (req, res) => {
   res.render('home');
 };
@@ -8,7 +10,7 @@ exports.newProject = (req, res) => {
   });
 };
 
-exports.newProjectSent = (req, res) => {  
+exports.newProjectSent = async (req, res) => {  
   // Form validation
   const {name} = req.body;
   const errors = [];
@@ -22,8 +24,21 @@ exports.newProjectSent = (req, res) => {
       errors
     });
   } else {
+    const project = await Projects.create({name});
     res.render('newProject', {
-      notErrors: 'Proyecto guardado correctamente'
+      notErrors: 'Proyecto agregado correctamente'
     });
+
+    // Projects.create({name})
+    //   .then(() => {
+    //     res.render('newProject', {
+    //       notErrors: 'Proyecto guardado correctamente'
+    //     });
+    //   })
+    //   .catch(() => {
+    //     res.render('newProject', {
+    //       notErrors: 'Favor de enviar el proyecto de nuevo'
+    //     });
+    //   });
   }
 };
