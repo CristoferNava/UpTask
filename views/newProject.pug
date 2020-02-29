@@ -6,6 +6,13 @@ block title
 block content
   .contenido-principal
     h1= mainTitle
+
+    if notErrors
+      .alerta.correcto= notErrors
+
+    if errors
+      each error in errors
+        .alerta.error= error.message
   
     form.agregar-proyecto(action="/new-project" method="POST")
       .campo 

@@ -8,6 +8,22 @@ exports.newProject = (req, res) => {
   });
 };
 
-exports.newProjectSent = (req, res) => {
-  res.send("Se envió el formulario");
+exports.newProjectSent = (req, res) => {  
+  // Form validation
+  const {name} = req.body;
+  const errors = [];
+
+  if (!name) {
+    errors.push({message: 'Debes agregar un nombre al proyecto'});
+  }
+
+  if (errors.length) {
+    res.render('newProject', {
+      errors
+    });
+  } else {
+    res.render('newProject', {
+      notErrors: 'Proyecto guardado correctamente'
+    });
+  }
 };
