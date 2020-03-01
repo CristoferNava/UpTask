@@ -1,4 +1,5 @@
 const Projects = require('../models/Projects');
+const slug = require('slug');
 
 exports.home = (req, res) => {
   res.render('home');
@@ -24,6 +25,7 @@ exports.newProjectSent = async (req, res) => {
       errors
     });
   } else {
+    // const url = slug(name).toLowerCase();
     const project = await Projects.create({name});
     res.render('newProject', {
       notErrors: 'Proyecto agregado correctamente'
