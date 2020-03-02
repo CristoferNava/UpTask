@@ -52,3 +52,14 @@ exports.newProjectSent = async (req, res) => {
     //   });
   }
 };
+
+exports.projectByURL = async (req, res, next) => {
+  const project = await Projects.findOne({
+    where: {
+      url: req.params.url
+    }
+  });
+  
+  if (!project) return next(); // Pasar al siguiente middleware
+  res.send('Se encontró el proyecto');
+};

@@ -23,6 +23,13 @@ app.set('views', path.join(__dirname, './views'));
 // Bodyparser config
 app.use(bodyParser.urlencoded({extended: true}));
 
+// Helpers config
+const helpers = require('./helpers');
+app.use((req, res, next) => {
+  res.locals.getData = helpers.getData; // Permite consumir getData en todos los archivos del proyecto
+  next(); // Siguiente middleware
+});
+
 // Set the ruoute
 app.use('/', routes());
 

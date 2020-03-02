@@ -1,0 +1,1 @@
+exports.getData = (object) => JSON.stringify(object, null, 2);
