@@ -10,7 +10,7 @@ html(lang="en")
     header.barra
       h1 
         a(href="/") UpTask - Administrador de Proyectos
-      a(href="") Cerrar Sesión
+        a(href="") Cerrar Sesión
 
     main.contenedor
       aside.contenedor-proyectos
@@ -20,8 +20,8 @@ html(lang="en")
         .panel.lista-proyectos
           h2 Proyectos
           ul#proyectos.proyectos
-            li
-              a(href="") Diseño de Tienda Virtual
-            li
-              a(href="") Diseño de Tienda Virtual
+            if projects
+              each project in projects
+                li
+                  a(href="")= project.name
       block content

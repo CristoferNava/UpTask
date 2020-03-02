@@ -1,13 +1,17 @@
 const Projects = require('../models/Projects');
-const slug = require('slug');
 
-exports.home = (req, res) => {
-  res.render('home');
+exports.home = async (req, res) => {
+  const projects = await Projects.findAll();
+  res.render('home', {
+    projects
+  });
 };
 
-exports.newProject = (req, res) => {
+exports.newProject = async (req, res) => {
+  const projects = await Projects.findAll();
   res.render('newProject', {
-    mainTitle: 'Crear Nuevo Proyecto'
+    mainTitle: 'Crear Nuevo Proyecto',
+    projects
   });
 };
 
@@ -21,14 +25,18 @@ exports.newProjectSent = async (req, res) => {
   }
 
   if (errors.length) {
+    const projects = await Projects.findAll();
     res.render('newProject', {
-      errors
+      errors,
+      projects
     });
   } else {
     // const url = slug(name).toLowerCase();
     const project = await Projects.create({name});
+    const projects = await Projects.findAll();
     res.render('newProject', {
-      notErrors: 'Proyecto agregado correctamente'
+      notErrors: 'Proyecto agregado correctamente',
+      projects
     });
 
     // Projects.create({name})
