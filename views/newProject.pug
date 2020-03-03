@@ -1,4 +1,5 @@
 extends base
+include mixins/projectForm
 
 block title
   title Nuevo Proyecto
@@ -13,10 +14,6 @@ block content
     if errors
       each error in errors
         .alerta.error= error.message
+    +projectForm(project)
   
-    form.agregar-proyecto(action="/new-project" method="POST")
-      .campo 
-        label(for="name") Nombre Proyecto:
-        input(type="text" id="name" name="name" placeholder="Nombre del Proyecto")
-      .campo.enviar
-        input(type="submit" value="Agregar" class="boton")
+    

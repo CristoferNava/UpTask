@@ -5,4 +5,8 @@ block title
 
 block content
   .contenido-principal
-    h1= mainTitle
+    h1 Listado de tareas - #{mainTitle}
+
+    .contenedor-acciones
+      a(href=`/project/edit/${project.id}` class="boton") Editar Proyecto
+      button#eleminar-proyecto(type="button" class="boton eliminar") Eliminar Proyecto

@@ -33,7 +33,7 @@ exports.newProjectSent = async (req, res) => {
     });
   } else {
     // const url = slug(name).toLowerCase();
-    const project = await Projects.create({name});
+    await Projects.create({name});
     const projects = await Projects.findAll();
     res.render('newProject', {
       notErrors: 'Proyecto agregado correctamente',
@@ -55,18 +55,67 @@ exports.newProjectSent = async (req, res) => {
 };
 
 exports.projectByURL = async (req, res, next) => {
-  const projects = await Projects.findAll();
-  const project = await Projects.findOne({
+  const projectsPromise = Projects.findAll();
+  const projectPromise = Projects.findOne({
     where: {
       url: req.params.url
     }
   });
   
+  const [projects, project] = await Promise.all([projectsPromise, projectPromise])
   if (!project) return next(); // Pasar al siguiente middleware
   
   // Renderizando la vista
   res.render('projectTasks', {
     mainTitle: project.name,
-    projects
+    projects,
+    project
   });
+};
+
+exports.editProject = async (req, res) => {
+  const projectsPromise = Projects.findAll();
+  const projectPromise = Projects.findOne({
+    where: {
+      id: req.params.id 
+    }
+  });
+  // Puesto que las consultas son independientes es más optimo usar un sólo await
+  const [projects, project] = await Promise.all([projectsPromise, projectPromise]);
+  if (!project) return next();
+
+  res.render('newProject', {
+    mainTitle: 'Editar Proyecto',
+    projects,
+    project
+  });
+};
+
+exports.updateProject = async (req, res) => {
+  // Form validation
+  const {name} = req.body;
+  const errors = [];
+
+  if (!name) {
+    errors.push({message: 'Debes agregar un nombre al proyecto'});
+  }
+
+  if (errors.length) {
+    const projects = await Projects.findAll();
+    res.render('newProject', {
+      errors,
+      projects
+    });
+  } else {
+    // const url = slug(name).toLowerCase();
+    await Projects.update(
+      {name: name},
+      {where: {id: req.params.id}});
+
+    const projects = await Projects.findAll();
+    res.render('newProject', {
+      notErrors: 'Proyecto actualizado correctamente',
+      projects
+    });
+  }
 };

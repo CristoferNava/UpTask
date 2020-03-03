@@ -14,5 +14,10 @@ module.exports = () => {
 
   // Route for each project
   router.get('/projects/:url', controllers.projectByURL);
+
+  // Routes for update the project
+  router.get('/project/edit/:id', controllers.editProject);
+  router.post('/new-project/:id', controllers.updateProject);
+
   return router;
 };
