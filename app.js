@@ -7,14 +7,14 @@ const bodyParser = require('body-parser');
 const db = require('./config/db');
 require('./models/Projects');
 db.sync()
-  .then(() => {console.log('Conexión a la base de datos establecia')})
+  .then(() => {console.log('Conexión a la base de datos establecida')})
   .catch((err) => {console.log(err)});
 
 // Create the app
 const app = express();
 
 // static files
-app.use(express.static('public'));
+app.use(express.static('./public'));
 
 // pug configuration
 app.set('view engine', 'pug');

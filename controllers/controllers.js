@@ -3,6 +3,7 @@ const Projects = require('../models/Projects');
 exports.home = async (req, res) => {
   const projects = await Projects.findAll();
   res.render('home', {
+    mainTitle: 'Proyectos',
     projects
   });
 };
@@ -54,6 +55,7 @@ exports.newProjectSent = async (req, res) => {
 };
 
 exports.projectByURL = async (req, res, next) => {
+  const projects = await Projects.findAll();
   const project = await Projects.findOne({
     where: {
       url: req.params.url
@@ -61,5 +63,10 @@ exports.projectByURL = async (req, res, next) => {
   });
   
   if (!project) return next(); // Pasar al siguiente middleware
-  res.send('Se encontró el proyecto');
+  
+  // Renderizando la vista
+  res.render('projectTasks', {
+    mainTitle: project.name,
+    projects
+  });
 };
