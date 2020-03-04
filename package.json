@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/CristoferNava/UpTask#readme",
   "dependencies": {
+    "axios": "^0.19.2",
     "concurrently": "^5.1.0",
     "express": "^4.17.1",
     "express-validator": "^6.4.0",
@@ -26,7 +27,8 @@
     "pug": "^2.0.4",
     "sequelize": "^5.21.5",
     "shortid": "^2.2.15",
-    "slug": "^2.1.1"
+    "slug": "^2.1.1",
+    "sweetalert2": "^9.8.2"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
