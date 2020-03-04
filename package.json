@@ -4,7 +4,9 @@
   "description": "Task manager",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon ./app.js"
+    "dev": "nodemon ./app.js",
+    "start": "concurrently \"npm run dev\" \"npm run watch\" ",
+    "watch": "webpack --watch --mode development"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,7 @@
   },
   "homepage": "https://github.com/CristoferNava/UpTask#readme",
   "dependencies": {
+    "concurrently": "^5.1.0",
     "express": "^4.17.1",
     "express-validator": "^6.4.0",
     "mysql2": "^2.1.0",
@@ -26,6 +29,11 @@
     "slug": "^2.1.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "@babel/core": "^7.8.6",
+    "@babel/preset-env": "^7.8.6",
+    "babel-loader": "^8.0.6",
+    "nodemon": "^2.0.2",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
   }
 }
