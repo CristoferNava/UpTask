@@ -1,1 +1,1 @@
-import tareas from './modules/removeAlert';
+import removeBtn from './modules/removeAlert';

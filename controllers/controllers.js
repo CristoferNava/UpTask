@@ -119,3 +119,14 @@ exports.updateProject = async (req, res) => {
     });
   }
 };
+
+exports.removeProject = async (req, res, next) => {
+  const {projectURL} = req.query;
+  const result = await Projects.destroy({where: {url: projectURL}});
+
+  if (!result) {
+    return next(); // No mandamos el mensaje status correcto
+  }
+
+  res.status(200).send('Mensaje de prueba');
+};

@@ -2,7 +2,7 @@ const path = require('path');
 require('webpack');
 
 module.exports = {
-  entry: 'public/js/app.js',
+  entry: './public/js/app.js',
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, 'public/dist')

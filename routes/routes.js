@@ -19,5 +19,8 @@ module.exports = () => {
   router.get('/project/edit/:id', controllers.editProject);
   router.post('/new-project/:id', controllers.updateProject);
 
+  // Remove project
+  router.delete('/projects/:url', controllers.removeProject);
+
   return router;
 };
