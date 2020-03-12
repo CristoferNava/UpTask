@@ -427,7 +427,19 @@ eval("var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_removeAlert__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/removeAlert */ \"./public/js/modules/removeAlert.js\");\n\n\n//# sourceURL=webpack:///./public/js/app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_removeAlert__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/removeAlert */ \"./public/js/modules/removeAlert.js\");\n/* harmony import */ var _modules_getTask__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/getTask */ \"./public/js/modules/getTask.js\");\n\n\n\n//# sourceURL=webpack:///./public/js/app.js?");
+
+/***/ }),
+
+/***/ "./public/js/modules/getTask.js":
+/*!**************************************!*\
+  !*** ./public/js/modules/getTask.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);\n\nvar tasks = document.querySelector('.listado-pendientes');\n\nif (tasks) {\n  tasks.addEventListener('click', function (e) {\n    if (e.target.classList.contains('fa-check-circle')) {\n      // Sent patch (only update a part of the object, the status in this case) petion to tasks/id\n      var taskID = e.target.parentElement.parentElement.dataset.taskId;\n      var url = \"\".concat(location.origin, \"/tasks/\").concat(taskID);\n      axios__WEBPACK_IMPORTED_MODULE_0___default.a.patch(url, {\n        taskID: taskID\n      }).then(function (res) {\n        console.log(res.data);\n      })[\"catch\"](function (err) {\n        console.log(err);\n      });\n    }\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (tasks);\n\n//# sourceURL=webpack:///./public/js/modules/getTask.js?");
 
 /***/ }),
 

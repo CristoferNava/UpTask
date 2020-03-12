@@ -26,5 +26,8 @@ module.exports = () => {
   // Tasks routes
   router.post('/projects/:url', tasksControllers.addTask);
 
+  // Update task status
+  router.patch('/tasks/:taskID', tasksControllers.changeTaskStatus);
+
   return router;
 };

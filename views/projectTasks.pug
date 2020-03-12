@@ -18,7 +18,7 @@ block content
       .listado-pendientes
         ul
           each task in tasks
-            li.tarea
+            li.tarea(data-task-id=task.id)
               p= task.task
               .acciones
                 if task.state

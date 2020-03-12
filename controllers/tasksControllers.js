@@ -20,3 +20,7 @@ exports.addTask = async (req, res, next) => {
   // Reload the page if everything is ok
   res.redirect(`/projects/${req.params.url}`);
 };
+
+exports.changeTaskStatus = (req, res) => {
+  res.send('Todo bien desde el backend!');
+} 
