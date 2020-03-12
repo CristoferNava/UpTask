@@ -2,7 +2,7 @@ const Sequilize = require('sequelize');
 const db = require('../config/db');
 const Projects = require('./Projects');
 
-const Tasks = db.define('tasks', {
+const Tasks = db.define('Tasks', {
   id: {
     type: Sequilize.INTEGER(11),
     primaryKey: true,

@@ -1,4 +1,5 @@
 const Projects = require('../models/Projects');
+const Tasks = require('../models/Tasks');
 
 exports.home = async (req, res) => {
   const projects = await Projects.findAll();
@@ -64,12 +65,16 @@ exports.projectByURL = async (req, res, next) => {
   
   const [projects, project] = await Promise.all([projectsPromise, projectPromise])
   if (!project) return next(); // Pasar al siguiente middleware
+
+  // Get the data of the tasks
+  const tasks = await Tasks.findAll({where: {ProjectId: project.id}});
   
   // Renderizando la vista
   res.render('projectTasks', {
     mainTitle: project.name,
     projects,
-    project
+    project,
+    tasks
   });
 };
 
