@@ -29,5 +29,8 @@ module.exports = () => {
   // Update task status
   router.patch('/tasks/:taskID', tasksControllers.changeTaskStatus);
 
+  // Remove task
+  router.delete('/tasks/:taskID', tasksControllers.removeTask);
+
   return router;
 };

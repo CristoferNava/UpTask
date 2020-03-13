@@ -21,6 +21,31 @@ exports.addTask = async (req, res, next) => {
   res.redirect(`/projects/${req.params.url}`);
 };
 
-exports.changeTaskStatus = (req, res) => {
+exports.changeTaskStatus = async (req, res, next) => {
+  // Get the id of the current task
+  const {taskID} = req.params;
+
+  // Change the status of the task
+  const task = await Tasks.findOne({where: {id: taskID}});
+  console.log(task.state);
+
+  if (task.state === 0) {
+    task.state = 1;
+  } else {
+    task.state = 0;
+  }
+
+  const result = await task.save();
+  if (!result) return next();
+
   res.send('Todo bien desde el backend!');
-} 
+}
+
+exports.removeTask = async (req, res, next) => {
+  const {taskID} = req.params;
+  const result = await Tasks.destroy({where: {id: taskID}});
+
+  if (!result) return next();
+
+  res.send('Conexión correcta con el servidor para borrar la tarea :0')
+};

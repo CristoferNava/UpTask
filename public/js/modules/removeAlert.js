@@ -17,7 +17,8 @@ if (removeBtn) {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: '¡Sí, borrar proyecto!'
+      confirmButtonText: '¡Sí, borrar proyecto!',
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
         // Envío de la petición a Axios
