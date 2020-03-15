@@ -3,6 +3,7 @@ const router = express.Router();
 const {body} = require('express-validator/check');
 const projectsControllers = require('../controllers/projectsControllers');
 const tasksControllers = require('../controllers/tasksControllers');
+const usersControllers = require('../controllers/usersControllers');
 
 module.exports = () => {
   // Main app routes
@@ -31,6 +32,9 @@ module.exports = () => {
 
   // Remove task
   router.delete('/tasks/:taskID', tasksControllers.removeTask);
+
+  // Users
+  router.get('/sign-up', usersControllers.signUp);
 
   return router;
 };
