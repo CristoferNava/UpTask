@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const db = require('./config/db');
 require('./models/Projects');
 require('./models/Tasks');
+require('./models/Users');
 db.sync()
   .then(() => {console.log('Conexión a la base de datos establecida')})
   .catch((err) => {console.log(err)});
