@@ -11,11 +11,28 @@ const Users = db.define('Users', {
   },
   email: {
     type: Sequilize.STRING(60),
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isEmail: {
+        msg: 'Debes agregar un email válido' // en caso de que no sea un correo
+      },
+      notEmpty: {
+        msg: 'El campo de email no puede ir vacío'
+      }
+    },
+    unique: {
+      args: true,
+      msg: 'Usuario ya registrado',
+    }
   },
   password: {
     type: Sequilize.STRING(60),
-    allowNul: false
+    allowNull: false,
+    validate: {
+      notEmpty: {
+        msg: 'El campo no puede ir vacío'
+      }
+    }
   }
 }, {
   hooks: {

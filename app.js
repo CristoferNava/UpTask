@@ -2,6 +2,8 @@ const express = require('express');
 const routes = require('./routes/routes');
 const path = require('path');
 const bodyParser = require('body-parser');
+require('express-validator')
+const flash = require('connect-flash')
 
 // Database conection
 const db = require('./config/db');
@@ -15,6 +17,9 @@ db.sync()
 // Create the app
 const app = express();
 
+// Bodyparser config
+app.use(bodyParser.urlencoded({extended: true}));
+
 // static files
 app.use(express.static('./public'));
 
@@ -22,8 +27,8 @@ app.use(express.static('./public'));
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, './views'));
 
-// Bodyparser config
-app.use(bodyParser.urlencoded({extended: true}));
+// add flash to the project
+app.use(flash())
 
 // Helpers config
 const helpers = require('./helpers');

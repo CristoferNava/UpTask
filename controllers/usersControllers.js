@@ -4,17 +4,17 @@ exports.showSignUp = (req, res) => {
   res.render('signUp');
 };
 
-exports.createUser = (req, res) => {
-  // podemos usar async/await o then y catch
+exports.createUser = async (req, res) => {
   const {email, password} = req.body;
-  Users.create({
-    email,
-    password
-  })
-  .then(() => {
-    res.redirect('/')
-  })
-  .catch(err => {
-    console.log(err);
-  });
+  try {
+    await Users.create({
+      email,
+      password
+    });
+    res.redirec('/signUp');
+  } catch (error) {
+    res.render('signUp', {
+      errors: error.errors // error.errors obetenido de sequilize
+    }); 
+  }
 };

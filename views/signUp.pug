@@ -5,8 +5,15 @@ html(lang="en")
     block title
       title Crear Cuenta
   body.login
+
     .contenedor-formulario
       h1 Crea tu cuenta en UpTask
+
+      if errors
+        each error in errors
+          if error.message == 'users.Users_email_unique must be unique'
+            p.error.alerta Usuario ya registrado
+          p.error.alerta= error.message
 
       form#formulario.caja.caja-login(action='/sign-up' method='POST')
         .campo
