@@ -1,5 +1,6 @@
 const Sequilize = require('sequelize');
 const db = require('../config/db');
+const bcrypt = require('bcrypt-nodejs');
 const Projects = require('./Projects');
 
 const Users = db.define('Users', {
@@ -15,6 +16,12 @@ const Users = db.define('Users', {
   password: {
     type: Sequilize.STRING(60),
     allowNul: false
+  }
+}, {
+  hooks: {
+    beforeCreate(user) {
+      user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10))
+    }
   }
 });
 Users.hasMany(Projects);

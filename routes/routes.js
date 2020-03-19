@@ -34,7 +34,8 @@ module.exports = () => {
   router.delete('/tasks/:taskID', tasksControllers.removeTask);
 
   // Users
-  router.get('/sign-up', usersControllers.signUp);
+  router.get('/sign-up', usersControllers.showSignUp);
+  router.post('/sign-up', usersControllers.createUser);
 
   return router;
 };
