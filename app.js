@@ -2,8 +2,11 @@ const express = require('express');
 const routes = require('./routes/routes');
 const path = require('path');
 const bodyParser = require('body-parser');
-require('express-validator')
-const flash = require('connect-flash')
+const expressValidator = require('express-validator');
+const flash = require('connect-flash');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const passport = require('./config/passport');
 
 // Database conection
 const db = require('./config/db');
@@ -27,13 +30,29 @@ app.use(express.static('./public'));
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, './views'));
 
-// add flash to the project
-app.use(flash())
+// app.use(expressValidator());
+app.use(cookieParser());
+
+// sesiones para nevegar entre distintas páginas sin tener que volvernos a 
+// autenticar
+app.use(session({
+  secret: 'revisar esto',
+  resave: false,
+  saveUnitialized: false
+}));
+
+// passport config
+app.use(passport.initialize());
+app.use(passport.session());
+
+// using flash
+app.use(flash());
 
 // Helpers config
 const helpers = require('./helpers');
 app.use((req, res, next) => {
   res.locals.getData = helpers.getData; // Permite consumir getData en todos los archivos del proyecto
+  res.locals.messages = req.flash(); // Usar los mensajes de flash
   next(); // Siguiente middleware
 });
 

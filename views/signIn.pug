@@ -3,19 +3,16 @@ html(lang="en")
   head
     include partials/header
     block title
-      title Crear Cuenta
+      title Iniciar Sesión
   body.login
 
     .contenedor-formulario
-      h1 Crea tu cuenta en UpTask
- 
-      if errors
-        each error in errors
-          if error.message == 'users.Users_email_unique must be unique'
-            p.error.alerta Usuario ya registrado
-          p.error.alerta= error.message
+      h1 Inicia Sesión en UpTask
 
-      form#formulario.caja.caja-login(action='/sign-up' method='POST')
+      if error
+        p.alerta.error= error
+ 
+      form#formulario.caja.caja-login(action='/sign-in' method='POST')
         .campo
           label(for='email') Correo:
           input(type='email' name='email' placeholder='Introduce tu correo' required value=email)
@@ -23,6 +20,6 @@ html(lang="en")
           label(for='password') Contraseña:
           input(type='password' name='password' placeholder='Introduce una contraseña' required value=password)
         .campo.enviar
-          input.boton(type='submit' value='Crear Cuenta')
+          input.boton(type='submit' value='Iniciar Sesión')
         .campo
-          a(href='/sign-in') ¿Ya tienes una cuenta? Inicia Sesión
+          a(href='/sign-up') ¿No tienes una cuenta? Crea una gratis
