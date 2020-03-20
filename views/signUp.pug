@@ -8,7 +8,7 @@ html(lang="en")
 
     .contenedor-formulario
       h1 Crea tu cuenta en UpTask
-
+ 
       if errors
         each error in errors
           if error.message == 'users.Users_email_unique must be unique'
@@ -18,10 +18,10 @@ html(lang="en")
       form#formulario.caja.caja-login(action='/sign-up' method='POST')
         .campo
           label(for='email') Correo:
-          input(type='email' name='email' placeholder='Introduce tu correo' required)
+          input(type='email' name='email' placeholder='Introduce tu correo' required value=email)
         .campo
           label(for='password') Contraseña:
-          input(type='password' name='password' placeholder='Introduce una contraseña' required)
+          input(type='password' name='password' placeholder='Introduce una contraseña' required value=password)
         .campo.enviar
           input.boton(type='submit' value='Crear Cuenta')
         .campo

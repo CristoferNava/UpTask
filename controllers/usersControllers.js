@@ -14,7 +14,9 @@ exports.createUser = async (req, res) => {
     res.redirec('/signUp');
   } catch (error) {
     res.render('signUp', {
-      errors: error.errors // error.errors obetenido de sequilize
+      errors: error.errors, // error.errors obetenido de sequilize
+      email,
+      password
     }); 
   }
 };
