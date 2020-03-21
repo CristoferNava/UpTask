@@ -65,7 +65,8 @@ exports.projectByURL = async (req, res, next) => {
   const projectsPromise = Projects.findAll({where: {UserId}});
   const projectPromise = Projects.findOne({
     where: {
-      url: req.params.url
+      url: req.params.url,
+      UserId
     }
   });
   
@@ -90,6 +91,7 @@ exports.editProject = async (req, res) => {
   const projectPromise = Projects.findOne({
     where: {
       id: req.params.id, 
+      UserId // evita el acceso a urls privadas
     }
   });
   // Puesto que las consultas son independientes es más optimo usar un sólo await
@@ -125,6 +127,7 @@ exports.updateProject = async (req, res) => {
       {name: name},
       {where: {id: req.params.id}});
 
+    const UserId = res.locals.user.id;
     const projects = await Projects.findAll({where: {UserId}});
     res.render('newProject', {
       notErrors: 'Proyecto actualizado correctamente',
