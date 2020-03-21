@@ -73,6 +73,9 @@ module.exports = () => {
   router.post('/sign-in', authControllers.authenticateUser);
   router.get('/log-out', authControllers.logOut);
   router.get('/reset-password', usersControllers.showResetPassword);
+  router.post('/reset-password', usersControllers.generateToken);
+  router.get('/reset-password/:token', usersControllers.sendToken);
+  router.post('/reset-password/:token', usersControllers.setNewPassword);
 
   return router;
 };

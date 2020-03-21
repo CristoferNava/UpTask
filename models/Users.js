@@ -33,7 +33,9 @@ const Users = db.define('Users', {
         msg: 'El campo no puede ir vacío'
       }
     }
-  }
+  },
+  token: Sequilize.STRING,
+  expiration: Sequilize.DATE
 }, {
   hooks: {
     beforeCreate(user) {

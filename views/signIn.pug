@@ -9,6 +9,9 @@ html(lang="en")
     .contenedor-formulario
       h1 Inicia Sesión en UpTask
 
+      if locals.messages.pollo
+        p.alerta.correcto= locals.messages.pollo
+
       if error
         p.alerta.error= error
  
