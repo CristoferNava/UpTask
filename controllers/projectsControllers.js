@@ -2,7 +2,8 @@ const Projects = require('../models/Projects');
 const Tasks = require('../models/Tasks');
 
 exports.home = async (req, res) => {
-  const projects = await Projects.findAll();
+  const UserId = res.locals.user.id;
+  const projects = await Projects.findAll({where: {UserId}});
   res.render('home', {
     mainTitle: 'Proyectos',
     projects
@@ -10,7 +11,8 @@ exports.home = async (req, res) => {
 };
 
 exports.newProject = async (req, res) => {
-  const projects = await Projects.findAll();
+  const UserId = res.locals.user.id;
+  const projects = await Projects.findAll({where: {UserId}});
   res.render('newProject', {
     mainTitle: 'Crear Nuevo Proyecto',
     projects
@@ -27,15 +29,18 @@ exports.newProjectSent = async (req, res) => {
   }
 
   if (errors.length) {
-    const projects = await Projects.findAll();
+    const UserId = res.locals.user.id;
+    const projects = await Projects.findAll({where: {UserId}});
     res.render('newProject', {
       errors,
       projects
     });
   } else {
     // const url = slug(name).toLowerCase();
-    await Projects.create({name});
-    const projects = await Projects.findAll();
+    // agregamos el proyecto a la base de datos
+    const UserId = res.locals.user.id;
+    await Projects.create({name, UserId});
+    const projects = await Projects.findAll({where: {UserId}});
     res.render('newProject', {
       notErrors: 'Proyecto agregado correctamente',
       projects
@@ -56,7 +61,8 @@ exports.newProjectSent = async (req, res) => {
 };
 
 exports.projectByURL = async (req, res, next) => {
-  const projectsPromise = Projects.findAll();
+  const UserId = res.locals.user.id;
+  const projectsPromise = Projects.findAll({where: {UserId}});
   const projectPromise = Projects.findOne({
     where: {
       url: req.params.url
@@ -79,10 +85,11 @@ exports.projectByURL = async (req, res, next) => {
 };
 
 exports.editProject = async (req, res) => {
-  const projectsPromise = Projects.findAll();
+  const UserId = res.locals.user.id;
+  const projectsPromise = Projects.findAll({where: {UserId}});
   const projectPromise = Projects.findOne({
     where: {
-      id: req.params.id 
+      id: req.params.id, 
     }
   });
   // Puesto que las consultas son independientes es más optimo usar un sólo await
@@ -106,7 +113,8 @@ exports.updateProject = async (req, res) => {
   }
 
   if (errors.length) {
-    const projects = await Projects.findAll();
+    const UserId = res.locals.user.id;
+    const projects = await Projects.findAll({where: {UserId}});
     res.render('newProject', {
       errors,
       projects
@@ -117,7 +125,7 @@ exports.updateProject = async (req, res) => {
       {name: name},
       {where: {id: req.params.id}});
 
-    const projects = await Projects.findAll();
+    const projects = await Projects.findAll({where: {UserId}});
     res.render('newProject', {
       notErrors: 'Proyecto actualizado correctamente',
       projects

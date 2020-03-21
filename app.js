@@ -53,6 +53,7 @@ const helpers = require('./helpers');
 app.use((req, res, next) => {
   res.locals.getData = helpers.getData; // Permite consumir getData en todos los archivos del proyecto
   res.locals.messages = req.flash(); // Usar los mensajes de flash
+  res.locals.user = {...req.user} || null; // Si el usuario existe lo asignamos sino asignamos null
   next(); // Siguiente middleware
 });
 

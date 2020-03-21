@@ -22,7 +22,6 @@ exports.createUser = async (req, res) => {
 };
 
 exports.showSignIn = (req, res) => {
-  console.log(res.locals.messages);
   const {error} = res.locals.messages;
   res.render('signIn', {
     error
