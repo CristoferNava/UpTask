@@ -27,3 +27,7 @@ exports.showSignIn = (req, res) => {
     error
   });
 };
+
+exports.showResetPassword = (req, res) => {
+  res.render('resetPassword');
+};

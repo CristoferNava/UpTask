@@ -72,6 +72,7 @@ module.exports = () => {
   router.get('/sign-in', usersControllers.showSignIn);
   router.post('/sign-in', authControllers.authenticateUser);
   router.get('/log-out', authControllers.logOut);
+  router.get('/reset-password', usersControllers.showResetPassword);
 
   return router;
 };
