@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const Sequilize = require('sequelize');
 const Op = Sequilize.Op;
 const bcrypt = require('bcrypt-nodejs');
+const sendEmail = require('../handlers/email');
 
 exports.showSignUp = (req, res) => {
   res.render('signUp');
@@ -58,7 +59,14 @@ exports.generateToken = async (req, res) => {
 
   // generate the url to reset the password
   const resetPassURL = `http://${req.headers.host}/reset-password/${user.token}`;
-  res.redirect(resetPassURL);
+  
+  // send the email to the user
+  await sendEmail.send({
+    user,
+    subject: 'Restablecer Contraseña Test',
+    resetPassURL,
+    emailView: 'resetPasswordEmail'
+  });
 };
 
 exports.sendToken =  async (req, res) => {
