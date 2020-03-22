@@ -67,6 +67,10 @@ exports.generateToken = async (req, res) => {
     resetPassURL,
     emailView: 'resetPasswordEmail'
   });
+
+  // end the process
+  req.flash('pollo', 'Se envió un enlace a tu correo electrónico');
+  res.redirect('/sign-in');
 };
 
 exports.sendToken =  async (req, res) => {
